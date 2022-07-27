@@ -9,3 +9,8 @@ form {
   display: flex;
   flex-direction: column;
 }
+
+.expCard, .eduCard {
+  display: flex;
+  flex-direction: column;
+}

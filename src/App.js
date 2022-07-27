@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
+import Experience from './components/Experience';
+import Education from './components/Education';
 
 class App extends Component {
   constructor() {
     super();
 
-    this.addExperience.bind(this);
-    this.addEducation.bind(this);
+    this.update.bind(this);
+    this.addExpCount.bind(this);
+    this.addEduCount.bind(this);
 
     this.state = {
       info: {
@@ -18,31 +21,43 @@ class App extends Component {
         email: '',
         description: '',
       },
-      experience: 0,
-      education: 0,
+      expCount: 0,
+      eduCount: 0,
     };
   }
+  
+  update = (event) => {
+    let key = event.target.id;
+    this.setState({
+      info: {
+        [key]: event.target.value,
+      },
+    });
+    console.log(event.target.id);
+  }
 
-  addExperience = () => {
+  addExpCount = () => {
     this.setState(prevState => ({
-      experience: prevState.experience + 1,
+      expCount: prevState.expCount + 1,
     }));
-    console.log(this.state.experience);
   };
 
-  addEducation = () => {
+  addEduCount = () => {
     this.setState(prevState => ({
-      education: prevState.education + 1,
+      eduCount: prevState.eduCount + 1,
     }));
   };
 
   render() {
-    let experience = [];
-    let education = [];
+    let exp = [];
+    let edu = [];
 
-    for (let i=0; i < this.state.experience; i++) {
-      experience.push(<h1 key={i}>TEST</h1>);
-      console.log('test');
+    for (let i=0; i < this.state.expCount; i++) {
+      exp.push(<Experience key={i}></Experience>);
+    }
+
+    for (let i=0; i < this.state.eduCount; i++) {
+      edu.push(<Education key={i}></Education>);
     }
 
     return (
@@ -51,31 +66,34 @@ class App extends Component {
         <form action="#" onSubmit={this.onSubmitForm}>
           <legend>Personal Information</legend>
           <label htmlFor='firstName'>
-            <input type='text' id='firstName' placeholder='First Name'/>
+            <input type='text' onChange={this.update} id='firstName' placeholder='First Name'/>
           </label>
           <label htmlFor='lastName'>
-            <input type='text' id='lastName' placeholder='Last Name'/>
+            <input type='text' onChange={this.update} id='lastName' placeholder='Last Name'/>
           </label>
           <label htmlFor='title'>
-            <input type='text' id='title' placeholder='Title'/>
+            <input type='text' onChange={this.update} id='title' placeholder='Title'/>
           </label>
           <label htmlFor='address'>
-            <input type='text' id='address' placeholder='Address'/>
+            <input type='text' onChange={this.update} id='address' placeholder='Address'/>
+          </label>
+          <label htmlFor='phoneNumber'>
+            <input type='text' onChange={this.update} id='phoneNumber' placeholder='Phone Number'/>
           </label>
           <label htmlFor='email'>
-            <input type='text' id='email' placeholder='Email'/>
+            <input type='text' onChange={this.update} id='email' placeholder='Email'/>
           </label>
           <label htmlFor='description'>
-            <textarea type='text' id='description' placeholder='Description'/>
+            <textarea type='text' onChange={this.update} id='description' placeholder='Description'/>
           </label>
 
           <legend>Experience</legend>
-          {experience}
-          <button id='newExp' onClick={this.addExperience}>Add</button>
+          {exp}
+          <button id='newExp' onClick={this.addExpCount}>Add</button>
 
           <legend>Education</legend>
-          {education}
-          <button id='newEdu' onClick={this.addEducation}>Add</button>
+          {edu}
+          <button id='newEdu' onClick={this.addEduCount}>Add</button>
         </form>
       </div>
     );
