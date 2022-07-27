@@ -23,23 +23,24 @@ class App extends Component {
     };
   }
 
-  addExperience() {
+  addExperience = () => {
     this.setState(prevState => ({
       experience: prevState.experience + 1,
     }));
-  }
+    console.log(this.state.experience);
+  };
 
-  addEducation() {
+  addEducation = () => {
     this.setState(prevState => ({
       education: prevState.education + 1,
     }));
-  }
+  };
 
   render() {
     let experience = [];
     let education = [];
 
-    for (let i=0; i < experience; i++) {
+    for (let i=0; i < this.state.experience; i++) {
       experience.push(<h1 key={i}>TEST</h1>);
       console.log('test');
     }
@@ -70,7 +71,7 @@ class App extends Component {
 
           <legend>Experience</legend>
           {experience}
-          <button id='newExp' onClick={console.log('test')}>Add</button>
+          <button id='newExp' onClick={this.addExperience}>Add</button>
 
           <legend>Education</legend>
           {education}
